@@ -112,7 +112,7 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- -- Toggle NERDTree
-mapcmd("<leader>tt", ":Neotree")
+mapcmd("<leader>tt", ":Neotree toggle")
 mapcmd("<LEADER>r", ":NvimTreeRefresh")
 keymap("n", "<LEADER>p", ":w | !open %<CR>", opts) -- live preview files using dufault App
 
