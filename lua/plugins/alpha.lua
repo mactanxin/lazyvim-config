@@ -23,17 +23,18 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
       dashboard.section.buttons.val = {
         dashboard.button(
           "f",
-          " " .. " Find file",
+          "📄 " .. " Find file",
           ":lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
         ),
-        dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-        dashboard.button("F", " " .. " Find text", ":Telescope live_grep <CR>"),
-        dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-        dashboard.button("m", "勒" .. " Key mappings", ":e ~/.config/nvim/lua/config/keymaps.lua <CR>"),
-        dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        dashboard.button("n", "🆕 " .. " New file", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("r", "📂 " .. " Recent files", ":Telescope oldfiles <CR>"),
+        dashboard.button("F", "🔤 " .. " Find text", ":Telescope live_grep <CR>"),
+        dashboard.button("c", "⚙️ " .. " Config", ":e $MYVIMRC <CR>"),
+        dashboard.button("m", "⌨️ " .. " Key mappings", ":e ~/.config/nvim/lua/config/keymaps.lua <CR>"),
+        dashboard.button("p", "📦 " .. " Plugins", ":e ~/.config/nvim/lua/plugins/others.lua <CR>"),
+        dashboard.button("s", "⏪ " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+        dashboard.button("l", "💤 " .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("q", "🚪 " .. " Quit", ":qa<CR>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
         button.opts.hl = "AlphaButtons"
