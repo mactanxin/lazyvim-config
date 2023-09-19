@@ -1,4 +1,4 @@
-{
+return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
@@ -33,7 +33,7 @@
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the inlay hints.
     inlay_hints = {
-      enabled = false,
+      enabled = true,
     },
     -- add any global capabilities here
     capabilities = {},
@@ -121,7 +121,7 @@
 
     if opts.inlay_hints.enabled and inlay_hint then
       Util.on_attach(function(client, buffer)
-        if client.supports_method('textDocument/inlayHint') then
+        if client.supports_method("textDocument/inlayHint") then
           inlay_hint(buffer, true)
         end
       end)

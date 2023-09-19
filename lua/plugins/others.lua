@@ -16,7 +16,7 @@ return {
   "mattn/emmet-vim",
   "nvim-telescope/telescope-file-browser.nvim",
   { "easymotion/vim-easymotion", event = "VeryLazy" },
- {
+  {
     "Bryley/neoai.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -101,5 +101,15 @@ return {
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       })
     end,
+  },
+  -- add symbols-outline
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    opts = {
+      -- add your options that should be passed to the setup() function here
+      position = "right",
+    },
   },
 }
