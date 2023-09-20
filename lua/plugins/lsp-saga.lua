@@ -1,5 +1,5 @@
 return {
-    {
+  {
     "glepnir/lspsaga.nvim",
     keys = {
       { "gpr", "<cmd>Lspsaga finder<CR>", "n" },
@@ -20,12 +20,15 @@ return {
     ft = { "typescript", "javascript", "vue", "svelte", "markdown", "react", "json", "lua", "sh", "python" },
     config = function()
       require("lspsaga").setup({
+        outline = {
+          layout = "float",
+        },
         symbol_in_winbar = {
           enabled = true,
         },
-        vim.diagnostic.config({ 
-          virtual_text = false
-        })
+        vim.diagnostic.config({
+          virtual_text = false,
+        }),
       })
     end,
   },
