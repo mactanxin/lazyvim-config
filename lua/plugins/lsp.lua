@@ -75,6 +75,16 @@ return {
     -- return true if you don't want this server to be setup with lspconfig
     ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
     setup = {
+      tailwindcss = function(_, opts)
+        local on_attach = function(client, bufnr)
+          -- other stuff --
+          require("tailwindcss-colors").buf_attach(bufnr)
+        end
+        require("lspconfig")["tailwindcss"].setup({
+          on_attach = on_attach,
+        })
+        return true
+      end,
       -- example to setup with typescript.nvim
       -- tsserver = function(_, opts)
       --   require("typescript").setup({ server = opts })
