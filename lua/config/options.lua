@@ -1,7 +1,6 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
-
 local options = {
   backup = false, -- creates a backup file
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -53,6 +52,11 @@ local options = {
 }
 
 vim.opt.shortmess:append("c")
+-- Add asterisks in block comments
+vim.opt.formatoptions:append({ "r" })
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+vim.opt.wildignore:append({ "*/node_modules/*" })
+
 
 for k, v in pairs(options) do
   vim.opt[k] = v
