@@ -15,6 +15,13 @@ return {
   "rmagatti/goto-preview",
   "mattn/emmet-vim",
   "nvim-telescope/telescope-file-browser.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- disable the keymap to grep files
+      { "<leader>/", false },
+    },
+  },
   { "easymotion/vim-easymotion", event = "VeryLazy" },
   {
     "Bryley/neoai.nvim",
@@ -133,11 +140,11 @@ return {
     end,
   },
   {
-  "themaxmarchuk/tailwindcss-colors.nvim",
-  -- run the setup function after plugin is loaded 
-  config = function ()
-    -- pass config options here (or nothing to use defaults)
-    require("tailwindcss-colors").setup()
-  end
+    "themaxmarchuk/tailwindcss-colors.nvim",
+    -- run the setup function after plugin is loaded
+    config = function()
+      -- pass config options here (or nothing to use defaults)
+      require("tailwindcss-colors").setup()
+    end,
   },
 }
