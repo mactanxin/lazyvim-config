@@ -16,7 +16,7 @@ local options = {
   pumheight = 10, -- pop up menu height
   showcmd = true,
   showmode = false, -- we don't need to see things like -- INSERT -- anymore
-  showtabline = 2, -- always show tabs
+  -- showtabline = 2, -- always show tabs
   smartcase = true, -- smart case
   smartindent = true, -- make indenting smarter again
   splitbelow = true, -- force all horizontal splits to go below current window
@@ -56,7 +56,6 @@ vim.opt.shortmess:append("c")
 vim.opt.formatoptions:append({ "r" })
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ "*/node_modules/*" })
-
 
 for k, v in pairs(options) do
   vim.opt[k] = v
