@@ -95,13 +95,20 @@ return {
       }
       local wtf = require("wtf")
       require("lualine").setup({
+        keys = {
+          { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+          { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+        },
         options = {
           icons_enabled = true,
-          theme = "auto",
+          theme = "powerline",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
-            statusline = {},
+            statusline = {
+              "dashboard",
+              "alpha",
+            },
             winbar = {},
           },
           ignore_focus = {},
@@ -116,6 +123,11 @@ return {
         sections = {
           lualine_a = {
             "mode",
+            symbols = {
+              unix = "", -- e712
+              dos = "", -- e70f
+              mac = "", -- e711
+            },
           },
           lualine_b = { "branch", "diff", "diagnostics" },
           -- show the current filename
