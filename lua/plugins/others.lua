@@ -1,5 +1,10 @@
 return {
   {
+    "Shatur/neovim-ayu",
+    lazy = false,
+    priority = 1000,
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     config = function()
@@ -10,6 +15,14 @@ return {
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
       })
+    end,
+  },
+  {
+    "lalitmee/cobalt2.nvim",
+    event = "VeryLazy",
+    dependencies = { "tjdevries/colorbuddy.nvim" },
+    init = function()
+      require("colorbuddy").colorscheme("cobalt2")
     end,
   },
   "rmagatti/goto-preview",

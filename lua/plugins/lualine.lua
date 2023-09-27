@@ -101,7 +101,7 @@ return {
         },
         options = {
           icons_enabled = true,
-          theme = "powerline",
+          theme = "auto",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -123,11 +123,6 @@ return {
         sections = {
           lualine_a = {
             "mode",
-            symbols = {
-              unix = "", -- e712
-              dos = "", -- e70f
-              mac = "", -- e711
-            },
           },
           lualine_b = { "branch", "diff", "diagnostics" },
           -- show the current filename
