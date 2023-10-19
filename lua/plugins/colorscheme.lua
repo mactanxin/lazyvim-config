@@ -1,6 +1,6 @@
 return {
   {
-    "navarasu/onedark.nvim",
+    "EdenEast/nightfox.nvim",
     opts = {
       style = "deep",
     },
@@ -19,7 +19,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "onedark",
+      colorscheme = "ayu-mirage",
     },
   },
 }
