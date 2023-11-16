@@ -9,7 +9,7 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 keymap("", "<Space>", "<Nop>", opts)
-keymap("", ";", ":", opts)
+-- keymap("", ";", ":", opts)
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -57,9 +57,9 @@ cnoreabbrev Qall qall
 ]])
 --Remap space as leader key
 --
-mapcmd("s", "<Nop>")
-mapcmd("S", "<Nop>")
-mapcmd("R", "<Nop>")
+-- mapcmd("s", "<Nop>")
+-- mapcmd("S", "<Nop>")
+-- mapcmd("R", "<Nop>")
 mapcmd("<LEADER><CR>", "noh")
 mapcmd("<Leader>O", "%bd|e#|bd#")
 
@@ -94,7 +94,7 @@ keymap(
 mapkey("n", "<C-a>", "gg<S-v>G")
 keymap("n", "Q", ":q<CR>", opts)
 keymap("n", "Z", ":q!<CR>", opts)
-mapcmd("R", "ReloadConfig<CR>")
+-- mapcmd("R", "ReloadConfig<CR>")
 keymap("", "cd", ":chdir", opts)
 
 -- Visual --
@@ -178,26 +178,26 @@ mapcmd("tn", "tabe")
 mapcmd("th", "-tabnext")
 mapcmd("tl", "+tabnext")
 
-mapkey("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<CR>")
-mapkey("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-mapkey("n", "<leader>fc", "<cmd>Telescope git_commits<CR>")
-mapkey("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-mapkey("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
-mapkey("n", "<leader>ft", "<cmd>Telescope notify<cr>")
-maplua("<leader>fs", "require('session-lens').search_session()")
-maplua("<leader>fp", "require('ui.theme_picker').open_picker()<cr>")
-mapkey("n", "<leader>fe", "<cmd>Telescope file_browser<cr>")
-mapkey("n", "<leader>ds", "<cmd>Telescope lsp_document_symbols<cr>")
-mapkey("n", "<leader>lso", "<cmd>Lspsaga outline<CR>")
+mapkey("n", ";ff", "<cmd>Telescope find_files hidden=true<CR>")
+mapkey("n", ";fg", "<cmd>Telescope live_grep<cr>")
+mapkey("n", ";fc", "<cmd>Telescope git_commits<CR>")
+mapkey("n", ";fb", "<cmd>Telescope buffers<cr>")
+mapkey("n", ";fh", "<cmd>Telescope help_tags<cr>")
+mapkey("n", ";ft", "<cmd>Telescope notify<cr>")
+maplua(";fs", "require('session-lens').search_session()")
+maplua(";fp", "require('ui.theme_picker').open_picker()<cr>")
+mapkey("n", ";fe", "<cmd>Telescope file_browser<cr>")
+mapkey("n", ";ds", "<cmd>Telescope lsp_document_symbols<cr>")
+mapkey("n", ";lso", "<cmd>Lspsaga outline<CR>")
 mapkey("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 mapkey("t", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 
 -- vim.keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 -- telescope git commands
-mapkey("n", "<leader>gc", "<cmd>Telescope git_commits<cr>")
-mapkey("n", "<leader>gbc", "<cmd>Telescope git_bcommits<cr>")
-mapkey("n", "<leader>gbr", "<cmd>Telescope git_branches<cr>")
-mapkey("n", "<leader>gst", "<cmd>Telescope git_status<cr>")
+mapkey("n", ";gc", "<cmd>Telescope git_commits<cr>")
+mapkey("n", ";gbc", "<cmd>Telescope git_bcommits<cr>")
+mapkey("n", ";gbr", "<cmd>Telescope git_branches<cr>")
+mapkey("n", ";gst", "<cmd>Telescope git_status<cr>")
 --[[ maplua("<leader>fs", "require('session-lens').search_session()") ]]
 maplua("<leader>cn", "require('notify').dismiss()<cr>", opts)
 -- SarchBox Key Bindings
@@ -205,7 +205,7 @@ mapcmd("<LEADER>rs", "SearchBoxIncSearch")
 mapcmd("<LEADER>rr", "SearchBoxReplace confirm=menu")
 
 -- EasyMotion
-keymap("n", "s", "<Plug>(easymotion-bd-f)", opts)
+-- keymap("n", "s", "<Plug>(easymotion-bd-f)", opts)
 
 -- EasyAlign
 mapcmd("ga", ":EasyAlign<CR>", opts)
