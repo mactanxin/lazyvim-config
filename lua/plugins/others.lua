@@ -17,14 +17,6 @@ return {
       })
     end,
   },
-  {
-    "lalitmee/cobalt2.nvim",
-    event = "VeryLazy",
-    dependencies = { "tjdevries/colorbuddy.nvim" },
-    init = function()
-      require("colorbuddy").colorscheme("cobalt2")
-    end,
-  },
   "rmagatti/goto-preview",
   "mattn/emmet-vim",
   "nvim-telescope/telescope-file-browser.nvim",
