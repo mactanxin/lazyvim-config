@@ -34,6 +34,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
           { action = [[lua require('telescope.builtin').find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})]], desc = " Find file",       icon = "📂 ", key = "f" },
           { action = "ene | startinsert",                                        desc = " New file",        icon = "🆕 ", key = "n" },
           { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = "🧾 ", key = "r" },
+          { action = [[lua require("telescope.builtin").oldfiles({ cwd_only = true })]],      desc = " Recent files (cwd)",    icon = "🧾 ", key = "R" },
           { action = "Telescope live_grep",                                      desc = " Find text",       icon = "🔤 ", key = "F" },
           { action = [[lua require("lazyvim.util").telescope.config_files()()]], desc = " Config",          icon = "⚙️  ", key = "c" },
           { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = "🔄 ", key = "s" },
