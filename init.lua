@@ -12,3 +12,5 @@ if vim.g.neovide then
   vim.g.transparency = 0.8
   vim.g.neovide_background_color = "#0f1117" .. alpha()
 end
+
+-- copyright @xin 2024
