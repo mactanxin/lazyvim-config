@@ -226,6 +226,7 @@ mapkey("n", "<leader>tn", ":lua require('null-ls').toggle({})<cr>")
 
 -- TreeSJ
 mapcmd("T", ":TSJToggle<CR>")
+mapkey("n", "<leader>J", ":TSJJoin<CR>")
 mapkey("n", "<leader>M", ":TSJSplit<CR>")
 
 -- Lsp_lines
