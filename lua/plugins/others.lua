@@ -56,7 +56,7 @@ return {
     },
     config = function()
       require("neoai").setup({
-        open_ai_key_env = "OPEN_API_KEY",
+        open_ai_key_env = "OPENAI_API_KEY",
         -- Options go here
       })
     end,
@@ -164,6 +164,14 @@ return {
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
       })
+    end,
+  },
+  {
+    "barrett-ruth/live-server.nvim",
+    build = "pnpm add -g live-server",
+    cmd = { "LiveServerStart", "LiveServerStop" },
+    config = function()
+      require("live-server").setup({})
     end,
   },
 }

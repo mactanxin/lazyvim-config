@@ -18,7 +18,10 @@ return {
       require("mini.cursorword").setup()
       require("mini.bracketed").setup()
       -- require("mini.jump").setup()
-      require("mini.animate").setup()
+      require("mini.animate").setup({
+        open = { enable = false },
+        close = { enable = false },
+      })
       require("mini.files").setup({
         options = {
           use_as_default_explorer = true,

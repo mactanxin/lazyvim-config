@@ -1,4 +1,7 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
+--
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.maplocalleader = " " -- Same for `maplocalleader`
 require("config.lazy")
 
 if vim.g.neovide then

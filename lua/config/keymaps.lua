@@ -93,7 +93,7 @@ keymap(
 --select all text
 mapkey("n", "<C-a>", "gg<S-v>G")
 keymap("n", "Q", ":q<CR>", opts)
-keymap("n", "Z", ":q!<CR>", opts)
+keymap("n", "Z", ":wq<CR>", opts)
 -- mapcmd("R", "ReloadConfig<CR>")
 keymap("", "cd", ":chdir", opts)
 
