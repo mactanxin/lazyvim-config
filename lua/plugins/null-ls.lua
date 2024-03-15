@@ -1,6 +1,11 @@
 return {
   "nvimtools/none-ls.nvim",
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+    "gbprod/none-ls-luacheck.nvim",
+  },
   config = function()
+    require("null-ls").register(require("none-ls-luacheck.diagnostics.luacheck"))
     local null_ls = require("null-ls")
     local formatting = null_ls.builtins.formatting
     -- local diagnostics = null_ls.builtins.diagnostics
@@ -17,7 +22,8 @@ return {
       sources = {
         formatting.markdownlint,
         formatting.stylua,
-        formatting.eslint_d,
+        require("none-ls.formatting.eslint_d"),
+        -- formatting.eslint_d,
         -- diagnostics.eslint_d,
       },
       -- you can reuse a shared lspconfig on_attach callback here
@@ -43,7 +49,7 @@ return {
       end,
     })
 
-    null_ls.builtins.formatting.eslint_d.with({
+    require("none-ls.formatting.eslint_d").with({
       extra_args = {
         "--style",
         "{IndentWidth: 2 ,ColumnLimit: 120}",
