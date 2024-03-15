@@ -85,6 +85,11 @@ return {
         })
         return true
       end,
+      volar = function(_, opts)
+        require("lspconfig").volar.setup({
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+        })
+      end,
       -- example to setup with typescript.nvim
       -- tsserver = function(_, opts)
       --   require("typescript").setup({ server = opts })
