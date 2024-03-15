@@ -56,8 +56,22 @@ return {
     },
     config = function()
       require("neoai").setup({
-        open_ai_key_env = "OPENAI_API_KEY",
-        -- Options go here
+        open_ai = {
+          api_key = {
+            env = "OPENAI_API_KEY",
+            value = nil,
+            -- `get` is is a function that retrieves an API key, can be used to override the default method.
+            -- get = function() ... end
+
+            -- Here is some code for a function that retrieves an API key. You can use it with
+            -- the Linux 'pass' application.
+            get = function()
+              local key = vim.fn.system("echo $OPENAI_API_KEY")
+              key = string.gsub(key, "\n", "")
+              return key
+            end,
+          },
+        },
       })
     end,
   },
