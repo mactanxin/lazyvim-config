@@ -81,12 +81,7 @@ mapkey("x", "<leader>o", '"_dP')
 --   term_mode = "t",
 --   command_mode = "c",
 --
-keymap(
-  "n",
-  "S",
-  ":w<CR> :lua vim.notify('Save Complete', 'info', { title = 'User Operation', timeout = 1000, stages = 'fade_in_slide_out'})<CR>",
-  opts
-)
+keymap("n", "S", ":w<CR>", opts)
 --select all text
 mapkey("n", "<C-a>", "gg<S-v>G")
 keymap("n", "Q", ":q<CR>", opts)
@@ -186,8 +181,8 @@ maplua(";fp", "require('ui.theme_picker').open_picker()<cr>")
 mapkey("n", ";fe", "<cmd>Telescope file_browser<cr>")
 mapkey("n", ";ds", "<cmd>Telescope lsp_document_symbols<cr>")
 mapkey("n", ";lso", "<cmd>Lspsaga outline<CR>")
-mapkey("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
-mapkey("t", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
+-- mapkey("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
+-- mapkey("t", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 
 -- vim.keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 -- telescope git commands
@@ -214,7 +209,6 @@ mapcmd("<LEADER>df", ":DiffviewOpen<CR>")
 mapcmd("<LEADER>pp", ":Peepsight<CR> :lua vim.notify('Peepsight toggled', 'info', { title = 'PeepSight Plugin' })<cr>")
 
 mapkey("n", "<leader>ew", "<C-w>r<cr>")
-mapcmd("<LEADER>fm", ":lua vim.lsp.buf.formatting()<cr>")
 mapkey("n", "<Leader>", ":WhichKey\r<leader>")
 -- toggle null-ls
 mapkey("n", "<leader>tn", ":lua require('null-ls').toggle({})<cr>")
