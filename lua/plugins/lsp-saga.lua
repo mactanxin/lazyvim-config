@@ -1,35 +1,111 @@
+local keymap = vim.keymap.set
+
+-- LSP finder - Find the symbol's definition
+-- If there is no definition, it will instead be hidden
+-- When you use an action in finder like "open vsplit",
+-- you can use <C-t> to jump back
+-- Code action
+keymap({ "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<CR>")
+
+-- Rename all occurrences of the hovered word for the entire file
+keymap("n", "grn", "<cmd>Lspsaga rename<CR>")
+
+-- Rename all occurrences of the hovered word for the selected files
+keymap("n", "gr", "<cmd>Lspsaga rename ++project<CR>")
+
+-- Peek definition
+-- You can edit the file containing the definition in the floating window
+-- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+-- It also supports tagstack
+-- Use <C-t> to jump back
+keymap("n", "gpr", "<cmd>Lspsaga finder<CR>")
+
+keymap("n", "gpi", "<cmd>Lspsaga finder imp<CR>")
+
+keymap("n", "gpd", "<cmd>Lspsaga peek_definition<CR>")
+
+keymap("n", "gpt", "<cmd>Lspsaga peek_type_definition<CR>")
+
+-- Diagnostic jump with filters such as only jumping to an error
+keymap("n", "[E", function()
+  require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end)
+keymap("n", "]E", function()
+  require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+end)
+
+-- Toggle outline
+keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+
+-- Hover Doc
+-- If there is no hover doc,
+-- there will be a notification stating that
+-- there is no information available.
+-- To disable it just use ":Lspsaga hover_doc ++quiet"
+-- Pressing the key twice will enter the hover window
+-- keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+
+-- If you want to keep the hover window in the top right hand corner,
+-- you can pass the ++keep argument
+-- Note that if you use hover with ++keep, pressing this key again will
+-- close the hover window. If you want to jump to the hover window
+-- you should use the wincmd command "<C-w>w"
+keymap("n", "K", "<cmd>Lspsaga hover_doc ++keep<CR>")
+
+-- Floating terminal
+keymap({ "n", "t" }, "<leader>tr", "<cmd>Lspsaga term_toggle<CR>")
+
+local keysets = {
+  { "gd", "<cmd>Lspsaga goto_definition<CR>" },
+  { "gdt", "<cmd>Lspsaga goto_type_definition<CR>" },
+  -- Call hierarchy
+  { "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>" },
+  { "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>" },
+  { "gpr", "<cmd>Lspsaga finder<CR>" },
+  -- Go to definition
+  -- Diagnostic jump
+  -- You can use <C-o> to jump back to your previous location
+  { "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>" },
+  { "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>" },
+}
+
+local function lsp_fts(type)
+  type = type or nil
+  local fts = {}
+  fts.backend = {
+    "lua",
+    "sh",
+    "zig",
+    "python",
+  }
+
+  fts.frontend = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "html",
+    "css",
+    "vue",
+    "svelte",
+    "markdown",
+    "react",
+  }
+  if not type then
+    return vim.list_extend(fts.backend, fts.frontend)
+  end
+  return fts[type]
+end
+
 return {
   {
-    "glepnir/lspsaga.nvim",
-    keys = {
-      { "gpr", "<cmd>Lspsaga finder<CR>", "n" },
-      { "<leader>lr", "<cmd>Lspsaga rename<CR>" },
-      { "<leader>la", "<cmd>Lspsaga code_action<CR>", "n, v" },
-      { "gpd", "<cmd>Lspsaga peek_definition<CR>" },
-      { "gd", "<cmd>Lspsaga goto_definition<CR>" },
-      { "gpt", "<cmd>Lspsaga peek_type_definition<CR>" },
-      { "gt", "<cmd>Lspsaga goto_type_definition<CR>" },
-      { "<Leader>lci", "<cmd>Lspsaga incoming_calls<CR>" },
-      { "<Leader>lco", "<cmd>Lspsaga outgoing_calls<CR>" },
-      { "<leader>lsd", "<cmd>Lspsaga show_line_diagnostics<CR>" },
-      { "<leader>so", "<cmd>Lspsaga outline<CR>" },
-      { "K", "<cmd>Lspsaga hover_doc<CR>" },
-      -- { "<A-d>", "<cmd>Lspsaga term_toggle<CR>", "n, t" },
-    },
+    "nvimdev/lspsaga.nvim",
     event = "LspAttach",
-    ft = { "typescript", "javascript", "vue", "svelte", "markdown", "react", "json", "lua", "sh", "python" },
+    ft = lsp_fts(),
+    keys = keysets,
     config = function()
-      require("lspsaga").setup({
-        outline = {
-          layout = "float",
-        },
-        symbol_in_winbar = {
-          enabled = true,
-        },
-        vim.diagnostic.config({
-          virtual_text = false,
-        }),
-      })
+      require("lspsaga").setup({})
     end,
   },
 }
