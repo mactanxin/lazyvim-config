@@ -36,7 +36,7 @@ return {
         formatting.stylua,
         require("none-ls.formatting.eslint_d"),
         -- require("none-ls.diagnostics.eslint_d"),
-        require("none-ls.code_actions.eslint_d"),
+        -- require("none-ls.code_actions.eslint_d"),
         require("none-ls-shellcheck.diagnostics"),
         -- require("none-ls-shellcheck.code_actions"),
         -- formatting.eslint_d,
