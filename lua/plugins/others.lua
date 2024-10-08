@@ -89,20 +89,21 @@ return {
   },
   {
     "Exafunction/codeium.vim",
+    event = "BufEnter",
     config = function()
       -- Change '<C-g>' here to any keycode you like.
       vim.keymap.set("i", "<C-g>", function()
         return vim.fn["codeium#Accept"]()
-      end, { expr = true })
+      end, { expr = true, silent = true })
       vim.keymap.set("i", "<c-;>", function()
         return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true })
+      end, { expr = true, silent = true })
       vim.keymap.set("i", "<c-,>", function()
         return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true })
+      end, { expr = true, silent = true })
       vim.keymap.set("i", "<c-x>", function()
         return vim.fn["codeium#Clear"]()
-      end, { expr = true })
+      end, { expr = true, silent = true })
     end,
   },
   {
@@ -148,6 +149,35 @@ return {
     config = function()
       -- pass config options here (or nothing to use defaults)
       require("tailwindcss-colors").setup()
+    end,
+  },
+  {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    -- optionally, override the default options:
+    config = function()
+      require("tailwindcss-colorizer-cmp").setup({
+        color_square_width = 2,
+      })
+    end,
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        filetypes = {
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "typescriptreact",
+          "javascriptreact",
+          "lua",
+        },
+        user_default_options = {
+          mode = "background",
+          tailwind = false, -- Enable tailwind colors
+        },
+      })
     end,
   },
   {

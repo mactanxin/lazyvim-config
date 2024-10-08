@@ -23,7 +23,7 @@ return {
       local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
         .. "/node_modules/@vue/language-server"
       local lspconfig = require("lspconfig")
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         init_options = {
           plugins = {
             {
@@ -37,6 +37,30 @@ return {
       })
 
       lspconfig.volar.setup({})
+
+      -- setup for tailwind
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.textDocument.colorProvider = { dynamicRegistration = false }
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+      local on_attach = function(client, bufnr)
+        if client.server_capabilities.colorProvider then
+          require("config.lsp.utils.documentcolors").buf_attach(bufnr)
+          require("colorizer").attach_to_buffer(
+            bufnr,
+            { mode = "background", css = true, names = false, tailwind = false }
+          )
+        end
+      end
+
+      lspconfig.tailwindcss.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "css", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+      })
       lsp.on_attach(function(client, bufnr)
         if client.name == "tailwindcss" then
           require("tailwindcss-colors").buf_attach(bufnr)

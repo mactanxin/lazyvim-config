@@ -39,7 +39,7 @@ return {
         -- require("none-ls.code_actions.eslint_d"),
         require("none-ls-shellcheck.diagnostics"),
         -- require("none-ls-shellcheck.code_actions"),
-        -- formatting.eslint_d,
+        formatting.eslint_d,
         -- diagnostics.eslint_d,
       },
       -- you can reuse a shared lspconfig on_attach callback here

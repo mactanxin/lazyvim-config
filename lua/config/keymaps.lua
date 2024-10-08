@@ -81,7 +81,12 @@ mapkey("x", "<leader>o", '"_dP')
 --   term_mode = "t",
 --   command_mode = "c",
 --
-keymap("n", "S", ":w<CR>", opts)
+keymap(
+  "n",
+  "S",
+  ":w<CR> :lua if vim.bo.filetype == 'vue' or vim.bo.filetype == 'typescript' then vim.cmd('EslintFixAll') end; <CR> :w<CR>",
+  opts
+)
 --select all text
 mapkey("n", "<C-a>", "gg<S-v>G")
 keymap("n", "Q", ":q<CR>", opts)

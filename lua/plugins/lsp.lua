@@ -2,8 +2,8 @@ return {
   "neovim/nvim-lspconfig",
   event = "LazyFile",
   dependencies = {
-    "mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    -- "mason.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
   },
   ---@class PluginLspOpts
   opts = function()
@@ -219,7 +219,20 @@ return {
       all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
     end
 
-    local ensure_installed = {} ---@type string[]
+    local ensure_installed = {
+      "lua_ls",
+      "ts_ls",
+      "html",
+      "cssls",
+      "tailwindcss",
+      "emmet_ls",
+      "jsonls",
+      "yamlls",
+      "dockerls",
+      "gopls",
+      "pyright",
+      "vuels",
+    } ---@type string[]
     for server, server_opts in pairs(servers) do
       if server_opts then
         server_opts = server_opts == true and {} or server_opts

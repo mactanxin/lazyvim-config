@@ -23,6 +23,33 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
+      local lsp_zero = require("lsp-zero")
+
+      local cmp_action = lsp_zero.cmp_action()
+      local cmp_format = lsp_zero.cmp_format()
+      local tailwindcss_colors = require("tailwindcss-colorizer-cmp")
+
+      local cmp_formatter = function(entry, vim_item)
+        -- vim_item as processed by tailwindcss-colorizer-cmp
+        vim_item = tailwindcss_colors.formatter(entry, vim_item)
+
+        -- change menu (name of source)
+        vim_item.menu = ({
+          nvim_lsp = "[LSP]",
+          buffer = "[Buffer]",
+          path = "[Path]",
+          emoji = "[Emoji]",
+          luasnip = "[LuaSnip]",
+          vsnip = "[VSCode Snippet]",
+          calc = "[Calc]",
+          spell = "[Spell]",
+        })[entry.source.name]
+        return vim_item
+      end
+      opts.formatting = {
+        fields = { "menu", "abbr", "kind" },
+        format = cmp_formatter,
+      }
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
