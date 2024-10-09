@@ -231,7 +231,7 @@ return {
       "dockerls",
       "gopls",
       "pyright",
-      "vuels",
+      "volar",
     } ---@type string[]
     for server, server_opts in pairs(servers) do
       if server_opts then
