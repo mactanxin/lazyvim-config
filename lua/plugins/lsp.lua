@@ -221,7 +221,6 @@ return {
 
     local ensure_installed = {
       "lua_ls",
-      "ts_ls",
       "html",
       "cssls",
       "tailwindcss",

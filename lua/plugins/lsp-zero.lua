@@ -23,17 +23,26 @@ return {
       local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
         .. "/node_modules/@vue/language-server"
       local lspconfig = require("lspconfig")
-      lspconfig.ts_ls.setup({
-        init_options = {
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = vue_language_server_path,
-              languages = { "vue" },
-            },
-          },
-        },
+      lspconfig.vtsls.setup({
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        settings = {
+          vtsls = { tsserver = { globalPlugins = {} } },
+        },
+        before_init = function(params, config)
+          local result = vim
+            .system({ "npm", "query", "#vue" }, { cwd = params.workspaceFolders[1].name, text = true })
+            :wait()
+          if result.stdout ~= "[]" then
+            local vuePluginConfig = {
+              name = "@vue/typescript-plugin",
+              location = vue_language_server_path .. "/node_modules/@vue/language-server",
+              languages = { "vue" },
+              configNamespace = "typescript",
+              enableForWorkspaceTypeScriptVersions = true,
+            }
+            table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
+          end
+        end,
       })
 
       lspconfig.volar.setup({})
