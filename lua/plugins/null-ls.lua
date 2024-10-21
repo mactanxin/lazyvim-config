@@ -35,12 +35,7 @@ return {
         formatting.markdownlint,
         formatting.stylua,
         require("none-ls.formatting.eslint_d"),
-        -- require("none-ls.diagnostics.eslint_d"),
-        -- require("none-ls.code_actions.eslint_d"),
         require("none-ls-shellcheck.diagnostics"),
-        -- require("none-ls-shellcheck.code_actions"),
-        formatting.eslint_d,
-        -- diagnostics.eslint_d,
       },
       -- you can reuse a shared lspconfig on_attach callback here
       -- on_attach = function(current_client, bufnr)
