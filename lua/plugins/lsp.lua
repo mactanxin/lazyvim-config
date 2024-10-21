@@ -104,6 +104,34 @@ return {
             },
           },
         },
+        vtsls = {
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+          settings = {
+            vtsls = { tsserver = { globalPlugins = {} } },
+          },
+          before_init = function(params, config)
+            -- local result = vim
+            --   .system({ "npm", "query", "#vue" }, { cwd = params.workspaceFolders[1].name, text = true })
+            --   :wait()
+            local mason_registry = require("mason-registry")
+            local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
+              .. "/node_modules/@vue/language-server"
+            -- if result.stdout ~= "[]" then
+            local vuePluginConfig = {
+              name = "@vue/typescript-plugin",
+              location = vue_language_server_path .. "/node_modules/@vue/language-server",
+              languages = { "vue" },
+              configNamespace = "typescript",
+              enableForWorkspaceTypeScriptVersions = true,
+            }
+            table.insert(config.settings.vtsls.tsserver.globalPlugins, vuePluginConfig)
+            -- end
+          end,
+        },
+        volar = {},
+        tailwindcss = {
+          filetypes = { "css", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
@@ -127,6 +155,9 @@ return {
     -- setup keymaps
     LazyVim.lsp.on_attach(function(client, buffer)
       require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+      if client.name == "tailwindcss" then
+        require("tailwindcss-colors").buf_attach(bufnr)
+      end
     end)
 
     LazyVim.lsp.setup()
