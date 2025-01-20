@@ -217,8 +217,6 @@ mapkey("n", "<leader>ew", "<C-w>r<cr>")
 mapkey("n", "<Leader>", ":WhichKey\r<leader>")
 -- toggle null-ls
 mapkey("n", "<leader>tn", ":lua require('null-ls').toggle({})<cr>")
--- LazyGit
--- mapcmd("<leader>lg", ":LazyGit")
 
 -- TreeSJ
 mapcmd("T", ":TSJToggle<CR>")
