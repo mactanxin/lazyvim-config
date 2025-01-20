@@ -10,6 +10,7 @@ return {
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
+    enabled = true,
     dependencies = {
       "hrsh7th/cmp-emoji",
     },
@@ -24,6 +25,21 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
       local lsp_zero = require("lsp-zero")
+
+      table.insert(opts.sources, 1, {
+        name = "minuet",
+        group_index = 1,
+        priority = 100,
+      })
+
+      -- 添加 performance 配置
+      opts.performance = {
+        fetching_timeout = 2000, -- 设置超时时间为 2000ms
+      }
+      opts.mapping = vim.tbl_deep_extend("force", opts.mapping or {}, {
+        -- if you wish to use manual complete
+        ["<A-y>"] = require("minuet").make_cmp_map(),
+      })
 
       local cmp_action = lsp_zero.cmp_action()
       local cmp_format = lsp_zero.cmp_format()

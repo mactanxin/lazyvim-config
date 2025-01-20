@@ -13,6 +13,35 @@ return {
     lsp_zero.on_attach(function(client, bufnr)
       lsp_zero.default_keymaps({ buffer = bufnr })
     end)
+
+    tailwindcss = function(_, opts)
+      local tw = LazyVim.lsp.get_raw_config("tailwindcss")
+      opts.filetypes = opts.filetypes or {}
+
+      -- Add default filetypes
+      vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+
+      -- Remove excluded filetypes
+      --- @param ft string
+      opts.filetypes = vim.tbl_filter(function(ft)
+        return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
+      end, opts.filetypes)
+
+      -- Additional settings for Phoenix projects
+      opts.settings = {
+        tailwindCSS = {
+          includeLanguages = {
+            elixir = "html-eex",
+            eelixir = "html-eex",
+            heex = "html-eex",
+          },
+        },
+      }
+
+      -- Add additional filetypes
+      vim.list_extend(opts.filetypes, opts.filetypes_include or {})
+    end
+
     return {
       -- options for vim.diagnostic.config()
       ---@type vim.diagnostic.Opts
@@ -130,13 +159,40 @@ return {
         },
         volar = {},
         tailwindcss = {
-          filetypes = { "css", "html", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+          -- exclude a filetype from the default_config
+          filetypes_exclude = { "markdown" },
+          -- add additional filetypes to the default_config
+          filetypes_include = {
+            "css",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+            "vue",
+          },
+          -- to fully override the default_config, change the below
+          -- filetypes = {}
         },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
+        tailwindcss = function(_, opts)
+          local tw = LazyVim.lsp.get_raw_config("tailwindcss")
+          opts.filetypes = opts.filetypes or {}
+          -- Add default filetypes
+          vim.list_extend(opts.filetypes, tw.default_config.filetypes)
+          -- Remove excluded filetypes
+          --- @param ft string
+          opts.filetypes = vim.tbl_filter(function(ft)
+            return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
+          end, opts.filetypes)
+
+          -- Add additional filetypes
+          vim.list_extend(opts.filetypes, opts.filetypes_include or {})
+        end,
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
         --   require("typescript").setup({ server = opts })
@@ -163,8 +219,8 @@ return {
     LazyVim.lsp.setup()
     LazyVim.lsp.on_dynamic_capability(require("lazyvim.plugins.lsp.keymaps").on_attach)
 
-    LazyVim.lsp.words.setup(opts.document_highlight)
-
+    -- LazyVim.lsp.words.setup(opts.document_highlight)
+    -- Snacks.words.setup(opts.document_highlight)
     -- diagnostics signs
     if vim.fn.has("nvim-0.10.0") == 0 then
       if type(opts.diagnostics.signs) ~= "boolean" then
