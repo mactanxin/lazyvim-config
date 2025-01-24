@@ -18,6 +18,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         \_.-'       |__|    `-._ |              '-.|     '-.| |   |
                                 `'                            '-._|
     ]]
+      local cwd = vim.loop.cwd()
       local opts = {
         animate = {
           duration = 20,
@@ -104,6 +105,19 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
             style = "lazygit",
           },
         },
+        picker = {
+          files = {
+            actions = {
+              parent = {
+                action = function(picker, selected)
+                  cwd = vim.loop.fs_realpath(cwd .. "/..")
+                  picker: set_cwd(cwd)
+                  picker:find()
+                end
+              }
+            }
+          }
+        }
       }
       return opts
     end,

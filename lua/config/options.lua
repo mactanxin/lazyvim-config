@@ -56,7 +56,7 @@ vim.opt.shortmess:append("c")
 vim.opt.formatoptions:append({ "r" })
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ "*/node_modules/*" })
-vim.g.lazyvim_picker = "telescope"
+-- vim.g.lazyvim_picker = "telescope"
 
 for k, v in pairs(options) do
   vim.opt[k] = v

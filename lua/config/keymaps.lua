@@ -124,13 +124,13 @@ mapkey("n", ";sv", "<C-w>t<C-w>H<CR>")
 mapkey("n", ";sh", "<C-w>t<C-w>K<CR>")
 
 -- Comment
-maplua("<LEADER>/", 'require("Comment.api").locked("toggle.linewise.current")()')
-keymap(
-  "v",
-  "<LEADER>/",
-  '<esc><cmd>lua require("Comment.api").locked("comment.linewise")(vim.fn.visualmode())<CR>',
-  opts
-)
+-- maplua("<LEADER>/", 'require("Comment.api").locked("toggle.linewise.current")()')
+-- keymap(
+--   "v",
+--   "<LEADER>/",
+--   '<esc><cmd>lua require("Comment.api").locked("comment.linewise")(vim.fn.visualmode())<CR>',
+--   opts
+-- )
 vim.keymap.set("n", "<leader>sr", "", {
   silent = true,
   desc = "reload init.lua",
@@ -175,26 +175,26 @@ mapcmd("tn", "tabe")
 mapcmd("th", "-tabnext")
 mapcmd("tl", "+tabnext")
 
-mapkey("n", ";ff", "<cmd>Telescope find_files hidden=true<CR>")
-mapkey("n", ";fg", "<cmd>Telescope live_grep<cr>")
-mapkey("n", ";fc", "<cmd>Telescope git_commits<CR>")
-mapkey("n", ";fb", "<cmd>Telescope buffers<cr>")
-mapkey("n", ";fh", "<cmd>Telescope help_tags<cr>")
-mapkey("n", ";ft", "<cmd>Telescope notify<cr>")
-maplua(";fs", "require('session-lens').search_session()")
-maplua(";fp", "require('ui.theme_picker').open_picker()<cr>")
-mapkey("n", ";fe", "<cmd>Telescope file_browser<cr>")
-mapkey("n", ";ds", "<cmd>Telescope lsp_document_symbols<cr>")
-mapkey("n", ";lso", "<cmd>Lspsaga outline<CR>")
+-- mapkey("n", ";ff", "<cmd>Telescope find_files hidden=true<CR>")
+-- mapkey("n", ";fg", "<cmd>Telescope live_grep<cr>")
+-- mapkey("n", ";fc", "<cmd>Telescope git_commits<CR>")
+-- mapkey("n", ";fb", "<cmd>Telescope buffers<cr>")
+-- mapkey("n", ";fh", "<cmd>Telescope help_tags<cr>")
+-- mapkey("n", ";ft", "<cmd>Telescope notify<cr>")
+-- maplua(";fs", "require('session-lens').search_session()")
+-- maplua(";fp", "require('ui.theme_picker').open_picker()<cr>")
+-- mapkey("n", ";fe", "<cmd>Telescope file_browser<cr>")
+-- mapkey("n", ";ds", "<cmd>Telescope lsp_document_symbols<cr>")
+-- mapkey("n", ";lso", "<cmd>Lspsaga outline<CR>")
 -- mapkey("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 -- mapkey("t", "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 
 -- vim.keymap.set({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")
 -- telescope git commands
-mapkey("n", ";gc", "<cmd>Telescope git_commits<cr>")
-mapkey("n", ";gbc", "<cmd>Telescope git_bcommits<cr>")
-mapkey("n", ";gbr", "<cmd>Telescope git_branches<cr>")
-mapkey("n", ";gst", "<cmd>Telescope git_status<cr>")
+-- mapkey("n", ";gc", "<cmd>Telescope git_commits<cr>")
+-- mapkey("n", ";gbc", "<cmd>Telescope git_bcommits<cr>")
+-- mapkey("n", ";gbr", "<cmd>Telescope git_branches<cr>")
+-- mapkey("n", ";gst", "<cmd>Telescope git_status<cr>")
 --[[ maplua("<leader>fs", "require('session-lens').search_session()") ]]
 maplua("<leader>cn", "require('notify').dismiss()<cr>", opts)
 -- SarchBox Key Bindings
