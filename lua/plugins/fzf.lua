@@ -173,29 +173,132 @@ return {
         desc = "Switch Buffer",
       },
       { "<leader>/", false },
-      { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      {
+        "<leader>:",
+        function()
+          Snacks.picker.command_history()
+        end,
+        desc = "Command History",
+      },
       { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
-      { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-      { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      {
+        "<leader>fb",
+        function()
+          Snacks.picker.buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
+        "<leader>fc",
+        function()
+          Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Find Config File",
+      },
+      {
+        "<leader>ff",
+        function()
+          Snacks.dashboard.pick("files")
+        end,
+        desc = "Find Files (Root Dir)",
+      },
       { ";ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       -- { "<leader>gf", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
-      { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
-      { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      {
+        "<leader>fr",
+        function()
+          Snacks.picker.recent()
+        end,
+        desc = "Recent",
+      },
+      -- { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      {
+        "<leader>fR",
+        function()
+          Snacks.picker.recent({ cwd = vim.uv.cwd() })
+        end,
+        desc = "Recent (cwd)",
+      },
       -- git
-      { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
-      { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
+      {
+        "<leader>gc",
+        function()
+          Snacks.picker.git_log()
+        end,
+        desc = "Git Log",
+      },
+      {
+        "<leader>gs",
+        function()
+          Snacks.picker.git_status()
+        end,
+        desc = "Git Status",
+      },
+      -- Grep
+      {
+        "<leader>sb",
+        function()
+          Snacks.picker.lines()
+        end,
+        desc = "Buffer Lines",
+      },
+      {
+        "<leader>sB",
+        function()
+          Snacks.picker.grep_buffers()
+        end,
+        desc = "Grep Open Buffers",
+      },
+      {
+        "<leader>sg",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep",
+      },
+      {
+        "<leader>sw",
+        function()
+          Snacks.picker.grep_word()
+        end,
+        desc = "Visual selection or word",
+        mode = { "n", "x" },
+      },
       -- search
       { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
       { "<leader>sa", "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
-      { "<leader>sb", "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
-      { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { "<leader>sC", "<cmd>FzfLua commands<cr>", desc = "Commands" },
-      { "<leader>sd", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
+      {
+        "<leader>sb",
+        function()
+          Snacks.picker.lines()
+        end,
+        desc = "Buffer Lines",
+      },
+      -- { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      {
+        "<leader>sC",
+        function()
+          Snacks.picker.commands()
+        end,
+        desc = "Commands",
+      },
+      {
+        "<leader>sd",
+        function()
+          Snacks.picker.diagnostics()
+        end,
+        desc = "Diagnostics",
+      },
       { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
-      { "<leader>fg", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      {
+        "<leader>fg",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep (Root Dir)",
+      },
       { "<leader>fG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },
@@ -210,7 +313,20 @@ return {
       { "<leader>sW", LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
       { "<leader>sw", LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
       { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "v", desc = "Selection (cwd)" },
-      { "<leader>uC", LazyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
+      {
+        "<leader>uC",
+        function()
+          Snacks.picker.colorschemes()
+        end,
+        desc = "Colorschemes",
+      },
+      {
+        "<leader>qp",
+        function()
+          Snacks.picker.projects()
+        end,
+        desc = "Projects",
+      },
       {
         "<leader>ss",
         function()

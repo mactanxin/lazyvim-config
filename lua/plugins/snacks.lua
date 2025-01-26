@@ -111,13 +111,66 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
               parent = {
                 action = function(picker, selected)
                   cwd = vim.loop.fs_realpath(cwd .. "/..")
-                  picker: set_cwd(cwd)
+                  picker:set_cwd(cwd)
                   picker:find()
-                end
-              }
-            }
-          }
-        }
+                end,
+              },
+            },
+          },
+        },
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = "close",
+              ["<C-c>"] = { "close", mode = "i" },
+              -- to close the picker on ESC instead of going to normal mode,
+              -- add the following keymap to your config
+              -- ["<Esc>"] = { "close", mode = { "n", "i" } },
+              ["<CR>"] = { "confirm", mode = { "n", "i" } },
+              ["G"] = "list_bottom",
+              ["gg"] = "list_top",
+              ["j"] = "list_down",
+              ["k"] = "list_up",
+              ["/"] = "toggle_focus",
+              ["q"] = "close",
+              ["?"] = "toggle_help",
+              ["<a-d>"] = { "inspect", mode = { "n", "i" } },
+              ["<c-a>"] = { "select_all", mode = { "n", "i" } },
+              ["<a-m>"] = { "toggle_maximize", mode = { "i", "n" } },
+              ["<a-p>"] = { "toggle_preview", mode = { "i", "n" } },
+              ["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
+              ["<C-w>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
+              ["<C-Up>"] = { "history_back", mode = { "i", "n" } },
+              ["<C-Down>"] = { "history_forward", mode = { "i", "n" } },
+              ["<Tab>"] = { "select_and_next", mode = { "i", "n" } },
+              ["<S-Tab>"] = { "select_and_prev", mode = { "i", "n" } },
+              ["<Down>"] = { "list_down", mode = { "i", "n" } },
+              ["<Up>"] = { "list_up", mode = { "i", "n" } },
+              ["<c-j>"] = { "list_down", mode = { "i", "n" } },
+              ["<c-k>"] = { "list_up", mode = { "i", "n" } },
+              ["<c-n>"] = { "list_down", mode = { "i", "n" } },
+              ["<c-p>"] = { "list_up", mode = { "i", "n" } },
+              ["<c-l>"] = { "preview_scroll_left", mode = { "i", "n" } },
+              ["<c-h>"] = { "preview_scroll_right", mode = { "i", "n" } },
+              ["<c-b>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<c-d>"] = { "list_scroll_down", mode = { "i", "n" } },
+              ["<c-f>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-g>"] = { "toggle_live", mode = { "i", "n" } },
+              ["<c-u>"] = { "list_scroll_up", mode = { "i", "n" } },
+              ["<ScrollWheelDown>"] = { "list_scroll_wheel_down", mode = { "i", "n" } },
+              ["<ScrollWheelUp>"] = { "list_scroll_wheel_up", mode = { "i", "n" } },
+              ["<c-v>"] = { "edit_vsplit", mode = { "i", "n" } },
+              ["<c-s>"] = { "edit_split", mode = { "i", "n" } },
+              ["<c-q>"] = { "qflist", mode = { "i", "n" } },
+              ["<a-i>"] = { "toggle_ignored", mode = { "i", "n" } },
+              ["<a-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+              ["<a-f>"] = { "toggle_follow", mode = { "i", "n" } },
+            },
+            b = {
+              minipairs_disable = true,
+            },
+          },
+        },
       }
       return opts
     end,
