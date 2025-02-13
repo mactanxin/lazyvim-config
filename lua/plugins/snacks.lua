@@ -388,7 +388,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         desc = "Find Files (Root Dir)",
       },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      -- { "<leader>gf", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+      { "<leader>gf", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
       {
         "<leader>fr",
         function()
@@ -437,7 +437,8 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
       {
         "<leader>sg",
         function()
-          Snacks.picker.grep()
+          -- Snacks.picker.grep()
+          Snacks.dashboard.pick("live_grep")
         end,
         desc = "Grep",
       },
@@ -476,9 +477,9 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
       },
       { "<leader>sD", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
       {
-        "<leader>fg",
+        "<leader>lg",
         function()
-          Snacks.picker.grep()
+          Snacks.dashboard.pick("live_grep")
         end,
         desc = "Grep (Root Dir)",
       },

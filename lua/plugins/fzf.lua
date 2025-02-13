@@ -173,6 +173,7 @@ return {
         desc = "Switch Buffer",
       },
       { "<leader>/", false },
+      { "<leader>fg", ":lua Snacks.dashboard.pick('live_grep')<cr>", desc = "snacks dashboard live grep" },
       { "<leader>fG", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },

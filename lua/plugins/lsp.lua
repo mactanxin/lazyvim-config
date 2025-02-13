@@ -298,6 +298,27 @@ return {
       end
       require("lspconfig")[server].setup(server_opts)
     end
+    local lspconfig = require("lspconfig")
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      on_init = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+          runtime = {
+            version = "LuaJIT",
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              "$VIMRUNTIME",
+              "$XDG_DATA_HOME/nvim/lazy",
+              "${3rd}/luv/library",
+            },
+          },
+        })
+      end,
+    })
 
     -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
