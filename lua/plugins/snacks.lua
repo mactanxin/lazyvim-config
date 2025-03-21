@@ -20,6 +20,11 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
     ]]
       local cwd = vim.loop.cwd()
       local opts = {
+        terminal = {
+          win = {
+            position = "float",
+          },
+        },
         animate = {
           duration = 20,
           easing = "linear",

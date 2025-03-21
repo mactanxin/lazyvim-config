@@ -32,6 +32,10 @@ return {
         priority = 100,
       })
 
+      table.insert(opts.sources, {
+        name = "render-markdown",
+      })
+
       -- 添加 performance 配置
       opts.performance = {
         fetching_timeout = 2000, -- 设置超时时间为 2000ms
