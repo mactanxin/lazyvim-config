@@ -21,11 +21,6 @@ return {
         bufnr = bufnr,
       })
     end
-    -- local format = function()
-    --  vim.lsp.buf.format({
-    --    async = false,
-    --  })
-    -- end
 
     null_ls.setup({
       debug = false,
@@ -35,27 +30,6 @@ return {
         require("none-ls.formatting.eslint_d"),
         require("none-ls-shellcheck.diagnostics"),
       },
-      -- you can reuse a shared lspconfig on_attach callback here
-      -- on_attach = function(current_client, bufnr)
-      --   if current_client.supports_method("textDocument/formatting") then
-      --     -- format web dev files
-      --     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.buf.format()")
-      --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      --     vim.api.nvim_create_autocmd("BufWritePre", {
-      --       group = augroup,
-      --       buffer = bufnr,
-      --       callback = function()
-      --         vim.lsp.buf.format({
-      --           filter = function(client)
-      --             --  only use null-ls for formatting instead of lsp server
-      --             return client.name == "null-ls"
-      --           end,
-      --           bufnr = bufnr,
-      --         })
-      --       end,
-      --     })
-      --   end
-      -- end,
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

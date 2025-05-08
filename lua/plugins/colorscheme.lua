@@ -2,6 +2,7 @@ return {
   {
     "Shatur/neovim-ayu",
     lazy = true,
+    priority = 1000,
     config = function()
       require("ayu").setup({
         mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
@@ -21,9 +22,9 @@ return {
         hide_fillchars = false,
         borderless_telescope = true,
       })
-      require("notify").setup({
-        background_colour = "#000000",
-      })
+      -- require("notify").setup({
+      --   background_colour = "#000000",
+      -- })
       -- vim.cmd("colorscheme cyberdream") -- set the colorscheme
     end,
   },
@@ -41,12 +42,23 @@ return {
       })
     end,
   },
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    transparent = true,
+    opts = {
+      style = "moon",
+      transparent = true,
+      sidebars = "transparent",
+      floats = "transparent",
+    },
+  },
   --
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "tokyonight",
-      style = "storm",
+      -- style = "storm",
       -- colorscheme = "onedark",
       -- colorscheme = "cyberdream",
     },
