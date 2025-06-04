@@ -53,11 +53,35 @@ return {
       floats = "transparent",
     },
   },
+  {
+    "loctvl842/monokai-pro.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("monokai-pro").setup({
+        transparent_background = true,
+        terminal_colors = true,
+        devicons = true,
+      })
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    transparent = true,
+    terminalColors = true,
+    opts = {
+      style = "moon",
+      transparent = true,
+      sidebars = "transparent",
+      floats = "transparent",
+    },
+  },
   --
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "kanagawa",
       -- style = "storm",
       -- colorscheme = "onedark",
       -- colorscheme = "cyberdream",
