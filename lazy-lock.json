@@ -1,6 +1,8 @@
 {
+  "CopilotChat.nvim": { "branch": "main", "commit": "16d897fd43d07e3b54478ccdb2f8a16e4df4f45a" },
   "LazyVim": { "branch": "main", "commit": "3f034d0a7f58031123300309f2efd3bb0356ee21" },
   "SchemaStore.nvim": { "branch": "main", "commit": "735e53aa42423239e1f862e3356bdda56a2ba30e" },
+  "blink-cmp-copilot": { "branch": "main", "commit": "439cff78780c033aa23cf061d7315314b347e3c1" },
   "blink-ripgrep.nvim": { "branch": "main", "commit": "af61f99945e15b195fbce017230cedb0497ded4d" },
   "blink.cmp": { "branch": "main", "commit": "49f211fe5d729df53df4c042d7c3464cf47d199e" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
@@ -9,6 +11,7 @@
   "codeium.nvim": { "branch": "main", "commit": "2b10c17c46e43154ebd058f6b3d3842dd8fa7cab" },
   "colorful-menu.nvim": { "branch": "master", "commit": "0041037582353a2101f0ba8bd8cae21c064921dc" },
   "conform.nvim": { "branch": "master", "commit": "f9ef25a7ef00267b7d13bfc00b0dea22d78702d5" },
+  "copilot.lua": { "branch": "master", "commit": "256393d0737741c460726716cac3a605c45d1c3f" },
   "cyberdream.nvim": { "branch": "main", "commit": "339a7b1293568405847b3627247da82a6030a852" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },

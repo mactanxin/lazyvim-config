@@ -3,6 +3,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "mikavilpas/blink-ripgrep.nvim",
+    "giuxtaposition/blink-cmp-copilot",
   },
   version = "*",
   ---@module 'blink.cmp'
@@ -91,16 +92,50 @@ return {
       -- 将“Nerd Font Mono”设置为“mono”，将“Nerd Font”设置为“normal”
       -- 调整间距以确保图标对齐
       nerd_font_variant = "mono",
+      kind_icons = {
+        Copilot = "",
+        Text = "󰉿",
+        Method = "󰊕",
+        Function = "󰊕",
+        Constructor = "󰒓",
+
+        Field = "󰜢",
+        Variable = "󰆦",
+        Property = "󰖷",
+
+        Class = "󱡠",
+        Interface = "󱡠",
+        Struct = "󱡠",
+        Module = "󰅩",
+
+        Unit = "󰪚",
+        Value = "󰦨",
+        Enum = "󰦨",
+        EnumMember = "󰦨",
+
+        Keyword = "󰻾",
+        Constant = "󰏿",
+
+        Snippet = "󱄽",
+        Color = "󰏘",
+        File = "󰈔",
+        Reference = "󰬲",
+        Folder = "󰉋",
+        Event = "󱐋",
+        Operator = "󰪚",
+        TypeParameter = "󰬛",
+      },
     },
 
     -- 已定义启用的提供程序的默认列表，以便您可以扩展它
     sources = {
       default = {
-        "buffer",
-        "ripgrep",
+        "copilot",
         "lsp",
         "path",
+        "buffer",
         "snippets",
+        -- "ripgrep",
       },
       providers = {
         -- score_offset设置优先级数字越大优先级越高
@@ -112,7 +147,22 @@ return {
         },
         path = { score_offset = 3 },
         lsp = { score_offset = 2 },
-        snippets = { score_offset = 1 },
+        -- snippets = { score_offset = 1 },
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          score_offset = 100,
+          async = true,
+          transform_items = function(_, items)
+            local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+            local kind_idx = #CompletionItemKind + 1
+            CompletionItemKind[kind_idx] = "Copilot"
+            for _, item in ipairs(items) do
+              item.kind = kind_idx
+            end
+            return items
+          end,
+        },
       },
     },
   },
