@@ -228,9 +228,6 @@ mapkey("n", "<leader>M", ":TSJSplit<CR>")
 -- Lsp_lines
 mapkey("n", "<leader>ll", ":lua require('lsp_lines').toggle<cr>")
 
--- NeoAI
-mapkey("n", "<leader>ai", ":NeoAI<cr>")
-
 -- Mini.Files
 mapkey("n", "<leader>mf", ":lua MiniFiles.open()<cr>")
 

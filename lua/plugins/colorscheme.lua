@@ -77,6 +77,11 @@ return {
       floats = "transparent",
     },
   },
+  {
+    "vertexE/synth.nvim",
+    lazy = true,
+    transparent = true,
+  },
   --
   {
     "LazyVim/LazyVim",
