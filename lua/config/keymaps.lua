@@ -81,12 +81,20 @@ mapkey("x", "<leader>o", '"_dP')
 --   term_mode = "t",
 --   command_mode = "c",
 --
-keymap(
-  "n",
-  "<C-s>",
-  ":lua if vim.bo.filetype == 'vue' or vim.bo.filetype == 'typescript' then vim.cmd('EslintFixAll') end; <CR> :w<CR>",
-  opts
-)
+vim.keymap.set("n", "<C-s>", function()
+  if vim.bo.filetype == 'vue' or vim.bo.filetype == 'typescript' or vim.bo.filetype == 'typescriptreact' then
+    -- 静默执行 code_action，不显示 'No actions available'
+    pcall(function()
+      vim.lsp.buf.code_action({
+        filter = function(action)
+          return action.title:find('Fix all') or action.title:find('eslint')
+        end,
+        apply = true,
+      })
+    end)
+  end
+  vim.cmd('w')
+end, opts)
 
 -- mapkey("n", "S", ":wq")
 --select all text

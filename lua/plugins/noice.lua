@@ -92,6 +92,9 @@ return {
           view = "mini",
         },
       },
+      presets = {
+        bottom_search = false,
+      },
     },
   },
 }
