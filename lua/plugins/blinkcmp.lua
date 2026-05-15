@@ -16,7 +16,18 @@ return {
       },
       completion = {
         -- 自动显示补全窗口
-        menu = { auto_show = true },
+        -- menu = { auto_show = true },
+        menu = {
+          enabled = function()
+            local context = require("blink.cmp.completion. trigger. context").get()
+            -- Disable in command-line search mode
+            if context.mode == "cmdline" then
+              local cmdtype = vim.fn.getcmdtype()
+              return cmdtype ~= "/" and cmdtype ~= "? "
+            end
+            return true
+          end,
+        },
         -- 不在当前行上显示所选项目的预览
         ghost_text = { enabled = false },
       },
@@ -138,6 +149,13 @@ return {
         -- "ripgrep",
       },
       providers = {
+        -- cmdline = {
+        --   enabled = function()
+        --     return vim.fn.getcmdtype() ~= ":"
+        --       or not vim.fn.getcmdline():match("^[%%0-9,'<>%-]*!")
+        --       or not vim.fn.getcmdline():match("^/")
+        --   end,
+        -- },
         -- score_offset设置优先级数字越大优先级越高
         buffer = { score_offset = 5 },
         ripgrep = {

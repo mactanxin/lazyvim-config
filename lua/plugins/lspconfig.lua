@@ -57,7 +57,17 @@ return {
       on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
-          command = "EslintFixAll",
+          callback = function()
+            -- 静默执行 code_action，不显示 'No actions available'
+            pcall(function()
+              vim.lsp.buf.code_action({
+                filter = function(action)
+                  return action.title:find('Fix all') or action.title:find('eslint')
+                end,
+                apply = true,
+              })
+            end)
+          end,
         })
       end,
     })

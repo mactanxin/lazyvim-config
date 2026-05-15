@@ -1,3 +1,5 @@
+local theme = require("config.theme")
+
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
@@ -50,6 +52,8 @@ local options = {
   foldmethod = "syntax", -- manual: 手动定义折叠；indent: 更多的缩进表示更高级别的折叠; expr: 用表达式定义折叠; syntax: 用语法高亮来定义折叠; diff: 对没有更改的文本进行折叠; marker: 对文中的标志进行折叠
   shell = "zsh",
 }
+
+theme.sync_background()
 
 vim.opt.shortmess:append("c")
 -- Add asterisks in block comments

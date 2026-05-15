@@ -2,7 +2,6 @@ return {
   {
     "Shatur/neovim-ayu",
     lazy = true,
-    priority = 1000,
     config = function()
       require("ayu").setup({
         mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
@@ -86,10 +85,46 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "catppuccin",
       -- style = "storm",
       -- colorscheme = "onedark",
       -- colorscheme = "cyberdream",
+    },
+  },
+  {
+    "miladggg/neonwave.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("neonwave").setup({
+        intensity = "neon", -- 'soft' or 'neon'
+        background = "light", -- 'light' or dark'
+        transparent_background = false, -- true or false
+      })
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      flavour = "auto", -- latte, frappe, macchiato, mocha
+      background = {
+        light = "latte",
+        dark = "frappe",
+      },
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+          enabled = true,
+          indentscope_color = "",
+        },
+      },
     },
   },
 }
