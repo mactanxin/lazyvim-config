@@ -8,6 +8,10 @@ return {
   ---@class PluginLspOpts
   ---
   opts = function(_, opts)
+    -- disable LazyVim's native LSP folding (foldmethod=expr) so nvim-ufo
+    -- stays in control of folds, otherwise it fights ufo and undoes its folds
+    opts.folds = { enabled = false }
+
     local customizations = {
       { rule = "style/*", severity = "off", fixable = true },
       { rule = "format/*", severity = "off", fixable = true },

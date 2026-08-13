@@ -1,12 +1,11 @@
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
-  event = "VeryLazy",
+  -- load before the buffer is displayed so ufo attaches on the first BufWinEnter;
+  -- VeryLazy is too late and misses already-open buffers
+  event = "BufReadPost",
   opts = {
     -- INFO: Uncomment to use treeitter as fold provider, otherwise nvim lsp is used
-    provider_selector = function(bufnr, filetype, buftype)
-      return { "treesitter", "indent" }
-    end,
     open_fold_hl_timeout = 400,
     close_fold_kinds_for_ft = {
       description = [[After the buffer is displayed (opened for the first time), close the
@@ -20,7 +19,10 @@ return {
         "comment",
       },
     },
-    -- close_fold_kinds = { "imports", "comment" },
+
+    provider_selector = function(bufnr, filetype, buftype)
+      return { "lsp", "treesitter" } -- Uses LSP folds with Treesitter fallback
+    end,
     preview = {
       win_config = {
         border = { "", "─", "", "", "", "─", "", "" },
