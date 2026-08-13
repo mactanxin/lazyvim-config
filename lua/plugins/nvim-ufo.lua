@@ -1,3 +1,60 @@
+-- TypeScript type-level declarations (treesitter node types) mapped to fold kinds.
+-- The LSP reports these ranges without a `kind`, so they can't be closed via
+-- `close_fold_kinds_for_ft` unless we tag them ourselves.
+local ts_type_kinds = {
+  interface_declaration = "interface",
+  type_alias_declaration = "type",
+  enum_declaration = "enum",
+}
+
+---Merged fold provider for TypeScript/TSX: keeps the LSP fold ranges (so
+---`imports`/`comment` kinds keep working) and tags type-level declaration
+---ranges with a kind, allowing them to be auto-closed. Brace-less declarations
+---(e.g. `type X = ...`) have no LSP fold range, so those are added from the
+---treesitter query results directly.
+---@param bufnr number
+local function ts_fold_provider(bufnr)
+  local lsp = require("ufo.provider.lsp")
+  local treesitter = require("ufo.provider.treesitter")
+  return lsp.getFolds(bufnr):thenCall(function(ranges)
+    local ok, ts_ranges = pcall(treesitter.getFolds, bufnr)
+    if not ok or not ts_ranges or #ts_ranges == 0 then
+      return ranges
+    end
+    for _, ts_range in ipairs(ts_ranges) do
+      local kind = ts_type_kinds[ts_range.kind]
+      if kind then
+        local tagged = false
+        for _, range in ipairs(ranges) do
+          if not range.kind and range.startLine == ts_range.startLine then
+            range.kind = kind
+            tagged = true
+            break
+          end
+        end
+        if not tagged then
+          table.insert(ranges, {
+            startLine = ts_range.startLine,
+            endLine = ts_range.endLine,
+            kind = kind,
+          })
+        end
+      end
+    end
+    require("ufo.model.foldingrange").sortRanges(ranges)
+    return ranges
+  end)
+end
+
+---Fallback wrapper: ufo invokes the fallback provider synchronously and does not
+---catch a throw (e.g. nofile buffers, missing treesitter parser), which surfaces
+---as an unhandled promise rejection. Return nil instead so no folds are applied.
+---@param bufnr number
+local function safe_treesitter(bufnr)
+  local ok, res = pcall(require("ufo.provider.treesitter").getFolds, bufnr)
+  return ok and res or nil
+end
+
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = "kevinhwang91/promise-async",
@@ -18,10 +75,21 @@ return {
         "imports",
         "comment",
       },
+      -- extra kinds tagged by the merged TS provider below
+      typescript = { "imports", "comment", "interface", "type", "enum" },
+      typescriptreact = { "imports", "comment", "interface", "type", "enum" },
     },
 
     provider_selector = function(bufnr, filetype, buftype)
-      return { "lsp", "treesitter" } -- Uses LSP folds with Treesitter fallback
+      -- nofile buffers (dashboard, scratch, ...) are rejected by both ufo
+      -- providers, so don't request folds for them at all
+      if buftype == "nofile" then
+        return ""
+      end
+      if filetype == "typescript" or filetype == "typescriptreact" then
+        return { ts_fold_provider, safe_treesitter }
+      end
+      return { "lsp", safe_treesitter } -- Uses LSP folds with Treesitter fallback
     end,
     preview = {
       win_config = {
